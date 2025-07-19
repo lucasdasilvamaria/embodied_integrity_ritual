@@ -1,11 +1,9 @@
-from app.logic.ritual_tracker import log_ritual_step
+import streamlit as st
 
-def main():
-    print("🌀 Embodied Integrity Ritual Tracker")
-    step = input("Which ritual step did you complete? ")
-    notes = input("Notes or reflections? ")
-    log_ritual_step(step, notes)
-    print("✅ Step logged. Stay strong, hermano.")
+st.set_page_config(page_title="Embodied Integrity Ritual", layout="centered")
 
-if __name__ == "__main__":
-    main()
+st.title("🧘 Embodied Integrity Ritual")
+st.write("Welcome, Newen.")
+
+if st.button("Start Ritual"):
+    st.success("Ritual Started!")

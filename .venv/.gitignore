@@ -1,0 +1,20 @@
+# Ignora o JSON da conta de serviço do Google
+embodied-ritual-app-c081a8809cd1.json
+
+# Ignora ambientes virtuais
+.venv/
+venv/
+
+# Ignora arquivos temporários
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.log
+
+# Ignora arquivos do PyCharm
+.idea/
+
+# Ignora arquivos de sistema
+.DS_Store
+Thumbs.db
