@@ -6,7 +6,7 @@ SCOPES = ['https://www.googleapis.com/auth/spreadsheets', 'https://www.googleapi
 
 # Carrega as credenciais com escopos explícitos
 creds = Credentials.from_service_account_file(
-    'embodied-ritual-app-c081a8809cd1.json',
+    'credentials.json',
     scopes=SCOPES
 )
 

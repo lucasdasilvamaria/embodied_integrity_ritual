@@ -2,7 +2,7 @@ import gspread
 from google.oauth2.service_account import Credentials
 
 # Carrega credenciais
-creds = Credentials.from_service_account_file("embodied-ritual-app-c081a8809cd1.json")
+creds = Credentials.from_service_account_file("credentials.json")
 scoped_creds = creds.with_scopes(["https://www.googleapis.com/auth/drive", "https://www.googleapis.com/auth/spreadsheets"])
 client = gspread.authorize(scoped_creds)
 

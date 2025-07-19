@@ -1,5 +1,5 @@
 # Ignora o JSON da conta de serviço do Google
-embodied-ritual-app-c081a8809cd1.json
+/data/credentials.json
 
 # Ignora ambientes virtuais
 .venv/
