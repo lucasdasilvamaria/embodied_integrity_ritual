@@ -11,12 +11,11 @@ sheet_id = "1rP07vxav0Iovn0_SJU0hv1Ct7ulrVGWrVyF6hmFhUaw"
 
 def connect_sheet():
     try:
-        # ✅ Streamlit Cloud: usa os secrets
+        # ✅ Lê as credenciais direto dos secrets do Streamlit
         creds_dict = dict(st.secrets["gcp_service_account"])
-        creds_json = StringIO(str(creds_dict).replace("'", '"'))
-        creds = ServiceAccountCredentials.from_json_keyfile_name(creds_json, scope)
-    except Exception:
-        # 🧪 Local (modo desenvolvedor)
+        creds = ServiceAccountCredentials.from_json_keyfile_dict(creds_dict, scope)
+    except Exception as e:
+        # 🔄 Fallback para arquivo local (quando testando localmente)
         creds_file = os.path.join("data", "credentials.json")
         creds = ServiceAccountCredentials.from_json_keyfile_name(creds_file, scope)
 
