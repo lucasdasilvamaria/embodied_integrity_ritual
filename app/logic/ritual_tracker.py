@@ -8,7 +8,7 @@ def connect_sheet():
     creds_info = st.secrets["gcp_service_account"]
     creds = service_account.Credentials.from_service_account_info(creds_info)
     client = gspread.authorize(creds)
-    sheet = client.open_by_key("1rP07vxav0Iovn0_SJU0hv1Ct7ulrVGWrVyF6hmFhUaw").sheet1
+    sheet = client.open_by_key("1rP07vxav0Iovn0_SJU0hv1Ct7ulrVGWrVyF6hmFhUaw").worksheet("Log")
     return sheet
 
 def log_ritual_completion(steps):
