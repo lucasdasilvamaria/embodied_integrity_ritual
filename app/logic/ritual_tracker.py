@@ -1,20 +1,29 @@
 import gspread
 from oauth2client.service_account import ServiceAccountCredentials
 from datetime import date
+from io import StringIO
 import os
+import streamlit as st
 
-# Conexão com Google Sheets
+# Google Sheets
 scope = ["https://spreadsheets.google.com/feeds", "https://www.googleapis.com/auth/drive"]
-creds_file = os.path.join("data", "credentials.json")
 sheet_id = "1rP07vxav0Iovn0_SJU0hv1Ct7ulrVGWrVyF6hmFhUaw"
 
 def connect_sheet():
-    creds = ServiceAccountCredentials.from_json_keyfile_name(creds_file, scope)
+    try:
+        # ✅ Streamlit Cloud: usa os secrets
+        creds_dict = dict(st.secrets["gcp_service_account"])
+        creds_json = StringIO(str(creds_dict).replace("'", '"'))
+        creds = ServiceAccountCredentials.from_json_keyfile_name(creds_json, scope)
+    except Exception:
+        # 🧪 Local (modo desenvolvedor)
+        creds_file = os.path.join("data", "credentials.json")
+        creds = ServiceAccountCredentials.from_json_keyfile_name(creds_file, scope)
+
     client = gspread.authorize(creds)
-    sheet = client.open_by_key(sheet_id).sheet1  # primeira aba
+    sheet = client.open_by_key(sheet_id).sheet1
     return sheet
 
-# Função para registrar o ritual
 def log_ritual_completion(steps):
     sheet = connect_sheet()
     today = date.today().strftime("%Y-%m-%d")
