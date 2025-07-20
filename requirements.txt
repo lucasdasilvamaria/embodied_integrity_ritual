@@ -1,9 +1,6 @@
+streamlit
 pandas
 openpyxl
-streamlit
 gspread
 oauth2client
-pip install gspread
-pip install gspread google-auth
-gspread
-google-auth
+python-dotenv
