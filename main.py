@@ -2,35 +2,47 @@ import streamlit as st
 import json
 import os
 from datetime import date
+from pathlib import Path
+from dotenv import load_dotenv
 from app.logic.ritual_tracker import log_ritual_completion
 
-steps_file = "data/ritual_steps.json"
-tags_file = "data/ritual_tags.json"
+# Carrega variáveis de ambiente
+load_dotenv()
+
+# Caminhos base
+BASE_DIR = Path(__file__).resolve().parent
+DATA_DIR = BASE_DIR / "data"
+CREDENTIALS_PATH = Path(os.getenv("CREDENTIALS_PATH", "credentials/credentials.json"))
+SHEET_ID = os.getenv("GOOGLE_SHEET_ID")
+
+steps_file = DATA_DIR / "ritual_steps.json"
+tags_file = DATA_DIR / "ritual_tags.json"
 
 # Carrega etapas
 def load_steps():
-    if os.path.exists(steps_file):
-        with open(steps_file, "r", encoding="utf-8") as f:
+    if steps_file.exists():
+        with steps_file.open("r", encoding="utf-8") as f:
             return json.load(f)
     return []
 
 # Salva etapas
 def save_steps(steps):
-    with open(steps_file, "w", encoding="utf-8") as f:
+    with steps_file.open("w", encoding="utf-8") as f:
         json.dump(steps, f, ensure_ascii=False, indent=2)
 
 # Carrega tags sugeridas
 def load_tags():
-    if os.path.exists(tags_file):
-        with open(tags_file, "r", encoding="utf-8") as f:
+    if tags_file.exists():
+        with tags_file.open("r", encoding="utf-8") as f:
             return json.load(f)
     return []
 
 # Salva tags
 def save_tags(tags):
-    with open(tags_file, "w", encoding="utf-8") as f:
+    with tags_file.open("w", encoding="utf-8") as f:
         json.dump(tags, f, ensure_ascii=False, indent=2)
 
+# Interface
 st.title("🧘 Embodied Integrity Ritual")
 st.write(f"**Data:** {date.today().strftime('%d/%m/%Y')}")
 

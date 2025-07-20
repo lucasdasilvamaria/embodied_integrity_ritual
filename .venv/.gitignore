@@ -1,8 +1,9 @@
 # Ignora o JSON da conta de serviço do Google
-/data/credentials.json
+data/credentials.json
 
 # Ignora ambientes virtuais
 .venv/
+.env
 venv/
 
 # Ignora arquivos temporários
